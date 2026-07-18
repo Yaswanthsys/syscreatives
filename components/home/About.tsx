@@ -51,10 +51,10 @@ export default function About() {
   };
 
   const timelineMilestones = [
-    { year: "2022", title: "SYS Creatives Founded", desc: "Started with custom wedding film edits and local corporate streams." },
-    { year: "2023", title: "Redundant Stream Arrays", desc: "Deployed cellular bonding boxes for guaranteed stream uptime." },
-    { year: "2024", title: "AI QR Galleries Launch", desc: "Introduced smart photo scanning with instant face retrieval." },
-    { year: "2025", title: "Unified Services Launch", desc: "Published all premium creative & live production services onto a single unified platform on SYS Creatives." }
+    { year: "2022", title: "SYS Creatives Founded", desc: "Established a boutique studio specializing in high-end event graphics and local multi-camera broadcasts." },
+    { year: "2023", title: "Broadcast & Motion Upgrade", desc: "Pioneered cellular bonded live stream arrays and cinema-grade video editing workflows." },
+    { year: "2024", title: "AI Photo Scanning Launch", desc: "Introduced custom AI face-recognition QR photo scanning systems for instant guest media sharing." },
+    { year: "2025", title: "Unified Digital Platform", desc: "Launched the unified SYS Creatives platform, combining elite live production, branding design, and web development." }
   ];
 
   return (
