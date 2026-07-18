@@ -252,9 +252,9 @@ export default function ContactForm() {
                     }`}
                   >
                     <option value="" disabled>Select a Service</option>
-                    <option value="Photography">Photography</option>
                     <option value="Live Streaming">Live Streaming</option>
                     <option value="Video Editing">Video Editing</option>
+                    <option value="Web Development">Web Development</option>
                     <option value="Graphic Design">Graphic Design</option>
                     <option value="QR Photo Scanning">QR Photo Scanning</option>
                   </select>

@@ -10,23 +10,6 @@ export interface Service {
 
 export const services: Service[] = [
   {
-    id: "photography",
-    title: "Photography",
-    subtitle: "Premium event coverage",
-    description: "Capturing high-end editorial and cinematic stills for luxury weddings, corporate forums, and commercial campaigns.",
-    iconName: "Camera",
-    bgImage: "/images/sony.png",
-    features: [
-      "Event & Gala Highlights",
-      "Sleek Portrait Sessions",
-      "Editorial Fashion Shoots",
-      "High-Resolution Digital Stills",
-      "Professional Color Editing",
-      "Online Private Galleries",
-      "Full Commercial Rights"
-    ]
-  },
-  {
     id: "live-streaming",
     title: "Live Streaming",
     subtitle: "Professional multi-camera production",
@@ -58,6 +41,23 @@ export const services: Service[] = [
       "Corporate Videos",
       "Motion Graphics & SFX",
       "Custom Logo Animation"
+    ]
+  },
+  {
+    id: "web-development",
+    title: "Web Development",
+    subtitle: "Premium digital solutions",
+    description: "Design and build fast, responsive, and stunning custom websites and digital portals tailored for brands that want to stand out.",
+    iconName: "Code",
+    bgImage: "/images/service-web.png",
+    features: [
+      "Bespoke Next.js & React Apps",
+      "Awwwards-Level Fluid Motion",
+      "SEO & PageSpeed Optimization",
+      "E-Commerce & Portfolios",
+      "Custom CMS Configuration",
+      "Interactive 3D Elements",
+      "Secure API Integrations"
     ]
   },
   {

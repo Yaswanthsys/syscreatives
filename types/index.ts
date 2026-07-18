@@ -2,7 +2,7 @@ export interface ContactFormData {
   fullName: string;
   mobileNumber: string;
   emailAddress: string;
-  serviceRequired: "Photography" | "Live Streaming" | "Video Editing" | "Graphic Design" | "QR Photo Scanning" | "";
+  serviceRequired: "Live Streaming" | "Video Editing" | "Web Development" | "Graphic Design" | "QR Photo Scanning" | "";
   message: string;
 }
 

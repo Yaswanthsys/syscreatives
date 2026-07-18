@@ -1,7 +1,7 @@
 export interface PortfolioItem {
   id: string;
   title: string;
-  category: "Photography" | "Live Streaming" | "Wedding" | "Corporate" | "Graphic Design" | "QR Gallery";
+  category: "Web Development" | "Live Streaming" | "Wedding" | "Corporate" | "Graphic Design" | "QR Gallery";
   image: string;
   videoUrl?: string; // Optional URL for video previews
   client?: string;
@@ -11,7 +11,7 @@ export interface PortfolioItem {
 
 export const portfolioCategories = [
   
-  "Photography",
+  "Web Development",
   "Live Streaming",
   "Wedding",
   "Corporate",
@@ -23,7 +23,7 @@ export const portfolioItems: PortfolioItem[] = [
   {
     id: "luxury-fashion-photos",
     title: "Vogue Autumn Editorial",
-    category: "Photography",
+    category: "Web Development",
     image: "/images/sony.png",
     client: "Verve Collection",
     date: "September 2025",

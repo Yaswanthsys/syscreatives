@@ -39,7 +39,7 @@ export default function Hero() {
     };
   }, [mouseX, mouseY]);
 
-  const specialties = ["Photography", "Live Streaming", "Video Editing", "Graphic Design", "QR Photo Scanning"];
+  const specialties = ["Live Streaming", "Video Editing", "Web Development", "Graphic Design", "QR Photo Scanning"];
 
   // Floating animations configuration
   const floatTransition = (duration: number, delay: number) => ({
@@ -82,9 +82,9 @@ export default function Hero() {
             transition={{ duration: 0.8, delay: 0.1 }}
             className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white tracking-tight leading-[1.1] mb-6"
           >
-            Capture Moments.<br />
+            Where Creativity.<br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold via-yellow-200 to-white">
-              Stream Memories.
+              Meets Technology.
             </span>
           </motion.h1>
 
@@ -141,17 +141,17 @@ export default function Hero() {
               y: isMobile ? 0 : springY,
             }}
           >
-            {/* 1. Photography Card (Top-Left) */}
+            {/* 1. Web Development Card (Top-Left) */}
             <motion.div
               animate={{ y: [0, -10, 0] }}
               transition={floatTransition(5, 0)}
               className="absolute top-[5%] left-[5%] w-[48%] aspect-square rounded-2xl overflow-hidden border border-white/[0.08] bg-[#1D1D1D]/50 backdrop-blur-md shadow-2xl z-20 group"
             >
-              <div className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" style={{ backgroundImage: `url('/images/sony.png')` }} />
+              <div className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" style={{ backgroundImage: `url('/images/service-web.png')` }} />
               <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
               <div className="absolute bottom-4 left-4 right-4">
-                <span className="text-[10px] text-gold font-bold uppercase tracking-wider">01. Premium Stills</span>
-                <h4 className="text-white text-xs sm:text-sm font-semibold tracking-wide">Event Photography</h4>
+                <span className="text-[10px] text-gold font-bold uppercase tracking-wider">01. Premium Code</span>
+                <h4 className="text-white text-xs sm:text-sm font-semibold tracking-wide">Web Development</h4>
               </div>
             </motion.div>
 
