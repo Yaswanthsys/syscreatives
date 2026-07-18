@@ -89,20 +89,7 @@ export default function Testimonials() {
               onMouseEnter={stopAutoSlide}
               onMouseLeave={startAutoSlide}
             >
-              <Card className="p-8 sm:p-12 md:p-16 border border-white/[0.08] relative z-10 flex flex-col md:flex-row gap-8 items-center text-left">
-                {/* Avatar Column */}
-                <div className="shrink-0 relative">
-                  <div className="h-24 w-24 sm:h-28 sm:w-28 rounded-full overflow-hidden border-2 border-gold/40 shadow-xl relative z-10">
-                    <img
-                      src={activeTestimonial.avatar}
-                      alt={activeTestimonial.name}
-                      className="h-full w-full object-cover"
-                    />
-                  </div>
-                  {/* Decorative Glow ring behind Avatar */}
-                  <div className="absolute inset-[-4px] rounded-full bg-gradient-to-tr from-gold/50 to-transparent blur-md z-0" />
-                </div>
-
+              <Card className="p-8 sm:p-12 md:p-16 border border-white/[0.08] relative z-10 flex flex-col gap-6 text-left">
                 {/* Content Column */}
                 <div className="flex-grow">
                   {/* Star Ratings */}

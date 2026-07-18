@@ -137,7 +137,7 @@ export default function Footer() {
       <div className="border-t border-white/[0.05] pt-8 relative z-10">
         <Container className="flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-[#9CA3AF] text-xs text-center sm:text-left">
-            &copy; {new Date().getFullYear()} SYS Creatives. All rights reserved. Designed to Awwwards standards.
+            &copy; {new Date().getFullYear()} SYS Creatives. All rights reserved.
           </p>
 
           <button
