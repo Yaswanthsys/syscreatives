@@ -15,10 +15,10 @@ import Container from "@/components/ui/Container";
 import SectionTitle from "@/components/ui/SectionTitle";
 
 export const metadata = {
-  title: "SY Media | Premium Creative Agency & Live Streaming Solutions",
-  description: "SY Media is an award-winning creative agency specializing in luxury live streaming, cinematic video editing, premium branding design, and AI face recognition QR galleries.",
+  title: "SYS Creatives | Premium Creative Agency & Live Streaming Solutions",
+  description: "SYS Creatives is an award-winning creative agency specializing in luxury live streaming, cinematic video editing, premium branding design, and AI face recognition QR galleries.",
   openGraph: {
-    title: "SY Media | Premium Creative Agency",
+    title: "SYS Creatives | Premium Creative Agency",
     description: "Capture Moments. Stream Memories. Luxury Live Streaming, Editing, and Design.",
     images: [{ url: "/images/hero-camera.png" }],
   },

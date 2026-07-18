@@ -128,7 +128,7 @@ export default function ContactForm() {
             
             <h3 className="text-2xl sm:text-3xl font-extrabold text-white mb-4">Request Received!</h3>
             <p className="text-sm text-[#9CA3AF] max-w-sm leading-relaxed mb-8">
-              Thank you for choosing SY Media. A creative director will contact you within 24 hours to align on your event parameters.
+              Thank you for choosing SYS Creatives. A creative director will contact you within 24 hours to align on your event parameters.
             </p>
             
             <Button variant="gold" onClick={() => setSubmitStatus("idle")}>

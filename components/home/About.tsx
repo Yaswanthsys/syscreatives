@@ -16,7 +16,7 @@ export default function About() {
       title: "Our Story",
       lead: "From a small production team to a full-service creative agency.",
       paragraphs: [
-        "Founded in 2022, SY Media started with a simple goal: to make premium live streaming accessible without sacrificing cinematic production quality. We noticed a major gap between standard static streaming feeds and high-budget television broadcasts.",
+        "Founded in 2022, SYS Creatives started with a simple goal: to make premium live streaming accessible without sacrificing cinematic production quality. We noticed a major gap between standard static streaming feeds and high-budget television broadcasts.",
         "By merging modern cine gear, robust network systems, and advanced post-production editing, we built a hybrid studio that helps clients broadcast events beautifully. Today, we are trusted by luxury brands, wedding couples, and corporations globally."
       ],
       icon: Compass
@@ -51,7 +51,7 @@ export default function About() {
   };
 
   const timelineMilestones = [
-    { year: "2022", title: "SY Media Founded", desc: "Started with custom wedding film edits and local corporate streams." },
+    { year: "2022", title: "SYS Creatives Founded", desc: "Started with custom wedding film edits and local corporate streams." },
     { year: "2023", title: "Redundant Stream Arrays", desc: "Deployed cellular bonding boxes for guaranteed stream uptime." },
     { year: "2024", title: "AI QR Galleries Launch", desc: "Introduced smart photo scanning with instant face retrieval." },
     { year: "2025", title: "Awwwards Creative Showcase", desc: "Awarded top media experience design for high-end luxury events." }
@@ -64,7 +64,7 @@ export default function About() {
 
       <Container className="relative z-10">
         <SectionTitle
-          title="About SY Media"
+          title="About SYS Creatives"
           subtitle="Behind The Lenses & Broadcasts"
           alignment="left"
         />

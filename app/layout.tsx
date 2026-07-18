@@ -9,7 +9,7 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "SY Media | Premium Creative Agency",
+  title: "SYS Creatives | Premium Creative Agency",
   description: "Luxury live streaming, cinematic video editing, premium branding, and AI face recognition QR galleries.",
 };
 

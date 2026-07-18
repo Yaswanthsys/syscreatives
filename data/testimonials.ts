@@ -16,7 +16,7 @@ export const testimonials: Testimonial[] = [
     company: "NextGen Tech",
     avatar: "/images/avatar-1.png",
     rating: 5,
-    review: "The live stream of our global summit was absolutely flawless. SY Media's multi-camera production quality was exceptional, and our virtual attendees felt like they were in the front row."
+    review: "The live stream of our global summit was absolutely flawless. SYS Creatives' multi-camera production quality was exceptional, and our virtual attendees felt like they were in the front row."
   },
   {
     id: "review-2",

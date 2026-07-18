@@ -22,7 +22,7 @@ export default function Footer() {
           <a href="#home" className="flex items-center gap-2 group">
             <img
               src="/images/logo.png"
-              alt="SY Media Logo"
+              alt="SYS Creatives Logo"
               className="h-10 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
             />
           </a>
@@ -137,7 +137,7 @@ export default function Footer() {
       <div className="border-t border-white/[0.05] pt-8 relative z-10">
         <Container className="flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-[#9CA3AF] text-xs text-center sm:text-left">
-            &copy; {new Date().getFullYear()} SY Media. All rights reserved. Designed to Awwwards standards.
+            &copy; {new Date().getFullYear()} SYS Creatives. All rights reserved. Designed to Awwwards standards.
           </p>
 
           <button

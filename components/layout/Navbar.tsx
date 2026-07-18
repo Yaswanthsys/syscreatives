@@ -41,7 +41,7 @@ export default function Navbar() {
         <a href="#home" className="flex items-center gap-2 group">
           <img
             src="/images/logo.png"
-            alt="SY Media Logo"
+            alt="SYS Creatives Logo"
             className="h-10 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
           />
         </a>

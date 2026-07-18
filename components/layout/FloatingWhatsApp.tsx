@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 
 export default function FloatingWhatsApp() {
   const phoneNumber = "+918500622735"; // Placeholder phone number
-  const message = "Hello SY Media, I'm interested in booking a service!";
+  const message = "Hello SYS Creatives, I'm interested in booking a service!";
   const url = `https://wa.me/+918500622735?text=${encodeURIComponent(message)}`;
 
   return (
