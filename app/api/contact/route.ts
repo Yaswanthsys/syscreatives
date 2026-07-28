@@ -25,12 +25,11 @@ export async function POST(req: Request) {
     const resend = new Resend(resendApiKey);
     const targetRecipient = "yaswanth777ys@gmail.com";
 
-    // Trigger Resend API call
-    // Note: Resend's default onboarding@resend.dev is used because it allows sending to the registered account email (yaswanth777ys@gmail.com) immediately.
-    const { data, error } = await resend.emails.send({
+    // 1. Trigger Resend API call to notify the studio team (Yaswanth)
+    const { data: teamData, error: teamError } = await resend.emails.send({
       from: "SYS Creatives Client <onboarding@resend.dev>",
       to: targetRecipient,
-      replyTo: emailAddress, // Allows hitting "Reply" in your email client to talk directly to the customer
+      replyTo: emailAddress, // Allows replying directly to the customer
       subject: `[SYS Creatives] Service Request: ${serviceRequired}`,
       html: `
         <div style="background-color: #0F0F0F; color: #FFFFFF; font-family: 'Poppins', Arial, sans-serif; padding: 40px; border-radius: 16px; max-width: 600px; margin: auto; border: 1px solid rgba(212, 175, 55, 0.15);">
@@ -84,9 +83,75 @@ export async function POST(req: Request) {
       `,
     });
 
-    if (error) {
-      console.error("Resend API response error:", error);
-      return NextResponse.json({ error: error.message }, { status: 400 });
+    if (teamError) {
+      console.error("Resend API response error (team email):", teamError);
+      return NextResponse.json({ error: teamError.message }, { status: 400 });
+    }
+
+    // 2. Trigger Resend API call to send confirmation to the customer
+    try {
+      const { error: customerError } = await resend.emails.send({
+        from: "SYS Creatives <onboarding@resend.dev>",
+        to: emailAddress,
+        subject: "Thank you for your inquiry — SYS Creatives",
+        html: `
+          <div style="background-color: #0F0F0F; color: #FFFFFF; font-family: 'Poppins', Arial, sans-serif; padding: 40px; border-radius: 16px; max-width: 600px; margin: auto; border: 1px solid rgba(212, 175, 55, 0.15);">
+            <!-- Header -->
+            <div style="text-align: center; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 20px; margin-bottom: 30px;">
+              <h2 style="color: #D4AF37; font-size: 24px; font-weight: bold; letter-spacing: 2px; margin: 0;">SYS CREATIVES</h2>
+              <p style="color: #9CA3AF; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; margin-top: 5px;">Consultation Request Received</p>
+            </div>
+            
+            <!-- Content Body -->
+            <div style="font-size: 14px; line-height: 1.6;">
+              <p style="color: #FFFFFF; font-size: 16px; font-weight: bold; margin-bottom: 15px;">Hello ${fullName},</p>
+              <p style="color: #9CA3AF; margin-bottom: 25px;">Thank you for your inquiry with SYS Creatives. We have received your consultation request, and a member of our team will contact you within 24 hours to align on your details.</p>
+              
+              <p style="color: #FFFFFF; font-weight: bold; text-transform: uppercase; font-size: 11px; letter-spacing: 1px; margin-bottom: 15px;">Summary of Your Inquiry Details:</p>
+              <!-- Details Grid -->
+              <table style="width: 100%; border-collapse: collapse; margin-bottom: 30px;">
+                <tr>
+                  <td style="padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.04); color: #9CA3AF; width: 35%;">Name:</td>
+                  <td style="padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.04); color: #FFFFFF; font-weight: 500;">${fullName}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.04); color: #9CA3AF;">Mobile Number:</td>
+                  <td style="padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.04); color: #FFFFFF; font-weight: 500;">${mobileNumber}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.04); color: #9CA3AF;">Email Address:</td>
+                  <td style="padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.04); color: #FFFFFF; font-weight: 500;">${emailAddress}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.04); color: #9CA3AF;">Service Requested:</td>
+                  <td style="padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.04); color: #D4AF37; font-weight: bold; font-size: 15px;">${serviceRequired}</td>
+                </tr>
+              </table>
+              
+              <!-- Message Block -->
+              <div style="background-color: #181818; border: 1px solid rgba(255,255,255,0.05); padding: 20px; border-radius: 12px;">
+                <h4 style="color: #FFFFFF; margin-top: 0; margin-bottom: 10px; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 8px;">Your Message</h4>
+                <p style="color: #E5E7EB; margin: 0; font-size: 13.5px; white-space: pre-wrap;">${message}</p>
+              </div>
+            </div>
+            
+            <!-- Footer -->
+            <div style="text-align: center; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 20px; margin-top: 30px; color: #9CA3AF; font-size: 11px;">
+              <p style="margin: 0;">SYS Creatives Studio — Where Creativity Meets Technology.</p>
+              <p style="margin: 5px 0 0 0;">This is an automated confirmation of your request. Please do not reply directly to this email.</p>
+            </div>
+          </div>
+        `,
+      });
+
+      if (customerError) {
+        console.warn(
+          "Resend rejected customer confirmation email. (This happens if your custom domain is not yet verified on the Resend dashboard). Details:",
+          customerError
+        );
+      }
+    } catch (customerMailError) {
+      console.warn("Error sending customer confirmation email:", customerMailError);
     }
 
     return NextResponse.json({
