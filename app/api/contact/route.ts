@@ -1,9 +1,6 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 
-// Initialize Resend with the provided API key (fallback allowed for out-of-the-box Vercel support)
-const resend = new Resend(process.env.RESEND_API_KEY || "re_JNq1qdmj_36umXKPYnyHiFFY68AFxfxqp");
-
 export async function POST(req: Request) {
   try {
     const { fullName, mobileNumber, emailAddress, serviceRequired, message } = await req.json();
@@ -16,6 +13,16 @@ export async function POST(req: Request) {
       );
     }
 
+    const resendApiKey = process.env.RESEND_API_KEY;
+    if (!resendApiKey) {
+      console.error("RESEND_API_KEY environment variable is not defined.");
+      return NextResponse.json(
+        { error: "Email configuration is incomplete on the server." },
+        { status: 500 }
+      );
+    }
+
+    const resend = new Resend(resendApiKey);
     const targetRecipient = "yaswanth777ys@gmail.com";
 
     // Trigger Resend API call
