@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import * as Icons from "lucide-react";
 import { services } from "@/data/services";
@@ -46,9 +47,12 @@ export default function Services() {
                   <div>
                     {/* Header: Icon & Sub-indicator */}
                     <div className="flex items-center justify-between mb-8">
-                      <div className="h-14 w-14 rounded-2xl bg-white/[0.03] border border-white/[0.08] flex items-center justify-center text-gold group-hover:text-black group-hover:bg-gold transition-all duration-500 shadow-lg">
+                      <Link
+                        href={`/services/${service.id}`}
+                        className="h-14 w-14 rounded-2xl bg-white/[0.03] border border-white/[0.08] flex items-center justify-center text-gold group-hover:text-black group-hover:bg-gold transition-all duration-500 shadow-lg"
+                      >
                         {IconComponent && <IconComponent className="h-6 w-6" />}
-                      </div>
+                      </Link>
                       <span className="text-[#9CA3AF] text-xs font-semibold uppercase tracking-widest bg-white/[0.02] border border-white/[0.04] px-3.5 py-1.5 rounded-full">
                         {service.subtitle}
                       </span>
@@ -56,7 +60,9 @@ export default function Services() {
 
                     {/* Title & Description */}
                     <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-gold transition-colors duration-300">
-                      {service.title}
+                      <Link href={`/services/${service.id}`} className="hover:underline decoration-gold/50">
+                        {service.title}
+                      </Link>
                     </h3>
                     <p className="text-[#9CA3AF] text-sm leading-relaxed mb-8">
                       {service.description}
@@ -77,14 +83,14 @@ export default function Services() {
                   </div>
 
                   {/* Learn More Button */}
-                  <div className="mt-auto">
-                    <a
-                      href="#contact"
+                  <div className="mt-auto pt-4">
+                    <Link
+                      href={`/services/${service.id}`}
                       className="inline-flex items-center gap-2 text-xs text-white font-bold tracking-widest uppercase hover:text-gold group/btn transition-colors duration-300"
                     >
                       Learn More
                       <Icons.ChevronRight className="h-4.5 w-4.5 text-gold transition-transform duration-300 group-hover/btn:translate-x-1" />
-                    </a>
+                    </Link>
                   </div>
                 </Card>
               </motion.div>

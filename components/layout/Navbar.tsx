@@ -1,6 +1,8 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { navItems } from "@/data/navigation";
@@ -10,6 +12,8 @@ import Container from "@/components/ui/Container";
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const pathname = usePathname();
+  const router = useRouter();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -19,12 +23,24 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Close mobile menu on clicking links
+  // Handle clicking navigation links
   const handleLinkClick = (href: string) => {
     setIsOpen(false);
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+    if (pathname === "/") {
+      if (href.startsWith("#")) {
+        const element = document.querySelector(href);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+          return;
+        }
+      }
+    }
+    
+    // If not on homepage or target is outside, route with hash
+    if (href.startsWith("#")) {
+      router.push(`/${href}`);
+    } else {
+      router.push(href);
     }
   };
 
@@ -38,13 +54,13 @@ export default function Navbar() {
     >
       <Container className="flex items-center justify-between">
         {/* Logo */}
-        <a href="#home" className="flex items-center gap-2 group">
+        <Link href="/" className="flex items-center gap-2 group">
           <img
             src="/images/logo.png"
             alt="SYS Creatives Logo"
             className="h-10 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
           />
-        </a>
+        </Link>
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-8">
@@ -66,11 +82,11 @@ export default function Navbar() {
 
         {/* Action Button */}
         <div className="hidden md:block">
-          <a href="#contact">
+          <button onClick={() => handleLinkClick("#contact")}>
             <Button variant="gold" size="sm">
               Request Service
             </Button>
-          </a>
+          </button>
         </div>
 
         {/* Mobile Hamburger Toggle */}
@@ -117,11 +133,11 @@ export default function Navbar() {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: navItems.length * 0.05 }}
             >
-              <a href="#contact" onClick={() => setIsOpen(false)}>
+              <button onClick={() => handleLinkClick("#contact")}>
                 <Button variant="gold" size="lg">
                   Request Service
                 </Button>
-              </a>
+              </button>
             </motion.div>
           </motion.div>
         )}

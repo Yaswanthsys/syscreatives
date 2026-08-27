@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import Link from "next/link";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 import { ArrowRight, Play, CheckCircle } from "lucide-react";
 import Button from "@/components/ui/Button";
@@ -145,70 +146,80 @@ export default function Hero() {
             <motion.div
               animate={{ y: [0, -10, 0] }}
               transition={floatTransition(5, 0)}
-              className="absolute top-[2%] left-[2%] w-[40%] aspect-square rounded-2xl overflow-hidden border border-white/[0.08] bg-[#1D1D1D]/50 backdrop-blur-md shadow-2xl z-10 group"
+              className="absolute top-[2%] left-[2%] w-[40%] aspect-square rounded-2xl overflow-hidden border border-white/[0.08] bg-[#1D1D1D]/50 backdrop-blur-md shadow-2xl z-10 group cursor-pointer hover:border-gold/50"
             >
-              <div className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" style={{ backgroundImage: `url('/images/service-streaming.png')` }} />
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
-              <div className="absolute bottom-4 left-4 right-4">
-                <span className="text-[10px] text-gold font-bold uppercase tracking-wider">01. Live Broadcast</span>
-                <h4 className="text-white text-xs sm:text-sm font-semibold tracking-wide">Live Streaming</h4>
-              </div>
+              <Link href="/services/live-streaming" className="block w-full h-full">
+                <div className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" style={{ backgroundImage: `url('/images/service-streaming.png')` }} />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
+                <div className="absolute bottom-4 left-4 right-4">
+                  <span className="text-[10px] text-gold font-bold uppercase tracking-wider">01. Live Broadcast</span>
+                  <h4 className="text-white text-xs sm:text-sm font-semibold tracking-wide">Live Streaming</h4>
+                </div>
+              </Link>
             </motion.div>
 
             {/* 2. Video Editing Card (Top-Right) */}
             <motion.div
               animate={{ y: [0, -12, 0] }}
               transition={floatTransition(6, 0.5)}
-              className="absolute top-[10%] right-[2%] w-[38%] aspect-square rounded-2xl overflow-hidden border border-white/[0.08] bg-[#1D1D1D]/50 backdrop-blur-md shadow-2xl z-10 group"
+              className="absolute top-[10%] right-[2%] w-[38%] aspect-square rounded-2xl overflow-hidden border border-white/[0.08] bg-[#1D1D1D]/50 backdrop-blur-md shadow-2xl z-10 group cursor-pointer hover:border-gold/50"
             >
-              <div className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" style={{ backgroundImage: `url('/images/service-editing.png')` }} />
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
-              <div className="absolute bottom-4 left-4 right-4">
-                <span className="text-[10px] text-gold font-bold uppercase tracking-wider">02. Cinematic Edit</span>
-                <h4 className="text-white text-xs sm:text-sm font-semibold tracking-wide">Video Editing</h4>
-              </div>
+              <Link href="/services/video-editing" className="block w-full h-full">
+                <div className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" style={{ backgroundImage: `url('/images/service-editing.png')` }} />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
+                <div className="absolute bottom-4 left-4 right-4">
+                  <span className="text-[10px] text-gold font-bold uppercase tracking-wider">02. Cinematic Edit</span>
+                  <h4 className="text-white text-xs sm:text-sm font-semibold tracking-wide">Video Editing</h4>
+                </div>
+              </Link>
             </motion.div>
 
             {/* 3. Web Development Card (Center) */}
             <motion.div
               animate={{ y: [0, -9, 0] }}
               transition={floatTransition(5.5, 0.8)}
-              className="absolute top-[28%] left-[20%] w-[44%] aspect-square rounded-2xl overflow-hidden border border-gold/25 bg-[#1D1D1D]/70 backdrop-blur-md shadow-3xl z-30 group animate-pulse-slow"
+              className="absolute top-[28%] left-[20%] w-[44%] aspect-square rounded-2xl overflow-hidden border border-gold/25 bg-[#1D1D1D]/70 backdrop-blur-md shadow-3xl z-30 group animate-pulse-slow cursor-pointer hover:border-gold"
             >
-              <div className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" style={{ backgroundImage: `url('/images/service-web.png')` }} />
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
-              <div className="absolute bottom-4 left-4 right-4">
-                <span className="text-[10px] text-gold font-bold uppercase tracking-wider">03. Premium Code</span>
-                <h4 className="text-white text-xs sm:text-sm font-semibold tracking-wide">Web Development</h4>
-              </div>
+              <Link href="/services/web-development" className="block w-full h-full">
+                <div className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" style={{ backgroundImage: `url('/images/service-web.png')` }} />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
+                <div className="absolute bottom-4 left-4 right-4">
+                  <span className="text-[10px] text-gold font-bold uppercase tracking-wider">03. Premium Code</span>
+                  <h4 className="text-white text-xs sm:text-sm font-semibold tracking-wide">Web Development</h4>
+                </div>
+              </Link>
             </motion.div>
 
             {/* 4. Graphic Design Card (Bottom-Left) */}
             <motion.div
               animate={{ y: [0, -8, 0] }}
               transition={floatTransition(5.2, 1.2)}
-              className="absolute bottom-[10%] left-[2%] w-[38%] aspect-square rounded-2xl overflow-hidden border border-white/[0.08] bg-[#1D1D1D]/50 backdrop-blur-md shadow-2xl z-10 group"
+              className="absolute bottom-[10%] left-[2%] w-[38%] aspect-square rounded-2xl overflow-hidden border border-white/[0.08] bg-[#1D1D1D]/50 backdrop-blur-md shadow-2xl z-10 group cursor-pointer hover:border-gold/50"
             >
-              <div className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" style={{ backgroundImage: `url('/images/service-design.png')` }} />
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
-              <div className="absolute bottom-4 left-4 right-4">
-                <span className="text-[10px] text-gold font-bold uppercase tracking-wider">04. Visual Branding</span>
-                <h4 className="text-white text-xs sm:text-sm font-semibold tracking-wide">Graphic Design</h4>
-              </div>
+              <Link href="/services/graphic-design" className="block w-full h-full">
+                <div className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" style={{ backgroundImage: `url('/images/service-design.png')` }} />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
+                <div className="absolute bottom-4 left-4 right-4">
+                  <span className="text-[10px] text-gold font-bold uppercase tracking-wider">04. Visual Branding</span>
+                  <h4 className="text-white text-xs sm:text-sm font-semibold tracking-wide">Graphic Design</h4>
+                </div>
+              </Link>
             </motion.div>
 
             {/* 5. QR Photo Scanning Card (Bottom-Right) */}
             <motion.div
               animate={{ y: [0, -14, 0] }}
               transition={floatTransition(4.8, 1.5)}
-              className="absolute bottom-[2%] right-[2%] w-[40%] aspect-square rounded-2xl overflow-hidden border border-white/[0.08] bg-[#1D1D1D]/50 backdrop-blur-md shadow-2xl z-20 group"
+              className="absolute bottom-[2%] right-[2%] w-[40%] aspect-square rounded-2xl overflow-hidden border border-white/[0.08] bg-[#1D1D1D]/50 backdrop-blur-md shadow-2xl z-20 group cursor-pointer hover:border-gold/50"
             >
-              <div className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" style={{ backgroundImage: `url('/images/service-qr.png')` }} />
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
-              <div className="absolute bottom-4 left-4 right-4">
-                <span className="text-[10px] text-gold font-bold uppercase tracking-wider">05. AI Photo Sharing</span>
-                <h4 className="text-white text-xs sm:text-sm font-semibold tracking-wide">QR Photo Scanning</h4>
-              </div>
+              <Link href="/services/qr-photo-scanning" className="block w-full h-full">
+                <div className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" style={{ backgroundImage: `url('/images/service-qr.png')` }} />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
+                <div className="absolute bottom-4 left-4 right-4">
+                  <span className="text-[10px] text-gold font-bold uppercase tracking-wider">05. AI Photo Sharing</span>
+                  <h4 className="text-white text-xs sm:text-sm font-semibold tracking-wide">QR Photo Scanning</h4>
+                </div>
+              </Link>
             </motion.div>
 
             {/* Central Glow Element behind cards */}

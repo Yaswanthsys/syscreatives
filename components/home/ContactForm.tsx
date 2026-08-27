@@ -6,12 +6,16 @@ import { CheckCircle2, AlertCircle, Send } from "lucide-react";
 import { ContactFormData, FormErrors } from "@/types";
 import Button from "@/components/ui/Button";
 
-export default function ContactForm() {
+interface ContactFormProps {
+  defaultService?: "Live Streaming" | "Video Editing" | "Web Development" | "Graphic Design" | "QR Photo Scanning" | string;
+}
+
+export default function ContactForm({ defaultService }: ContactFormProps = {}) {
   const [formData, setFormData] = useState<ContactFormData>({
     fullName: "",
     mobileNumber: "",
     emailAddress: "",
-    serviceRequired: "",
+    serviceRequired: (defaultService as any) || "",
     message: "",
   });
 

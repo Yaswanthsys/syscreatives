@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
 import { ArrowUp, Instagram, Facebook, Youtube, Mail, Phone, MapPin } from "lucide-react";
 import { navItems } from "@/data/navigation";
 import { services } from "@/data/services";
@@ -19,13 +20,13 @@ export default function Footer() {
       <Container className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 relative z-10 mb-12">
         {/* Brand Column */}
         <div className="flex flex-col gap-4">
-          <a href="#home" className="flex items-center gap-2 group">
+          <Link href="/" className="flex items-center gap-2 group">
             <img
               src="/images/logo.png"
               alt="SYS Creatives Logo"
               className="h-10 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
             />
-          </a>
+          </Link>
           <p className="text-[#9CA3AF] text-sm leading-relaxed max-w-xs mt-2">
             Capturing premium cinematic moments and broadcasting live stream memories for luxury weddings, corporate summits, and high-end events.
           </p>
@@ -70,13 +71,13 @@ export default function Footer() {
           <ul className="flex flex-col gap-3">
             {navItems.map((item) => (
               <li key={item.label}>
-                <a
-                  href={item.href}
+                <Link
+                  href={`/${item.href}`}
                   className="text-[#9CA3AF] text-sm hover:text-white transition-colors duration-300 flex items-center gap-1.5 group"
                 >
                   <span className="h-1 w-1 rounded-full bg-gold scale-0 group-hover:scale-100 transition-transform duration-300" />
                   {item.label}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
@@ -91,13 +92,13 @@ export default function Footer() {
           <ul className="flex flex-col gap-3">
             {services.map((service) => (
               <li key={service.id}>
-                <a
-                  href="#services"
+                <Link
+                  href={`/services/${service.id}`}
                   className="text-[#9CA3AF] text-sm hover:text-white transition-colors duration-300 flex items-center gap-1.5 group"
                 >
                   <span className="h-1 w-1 rounded-full bg-gold scale-0 group-hover:scale-100 transition-transform duration-300" />
                   {service.title}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
