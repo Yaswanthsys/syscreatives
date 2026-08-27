@@ -15,7 +15,7 @@ export const services: Service[] = [
     subtitle: "Professional multi-camera production",
     description: "Broadcast your event to a global audience with high-definition, multi-camera live streaming services tailored for flawless real-time engagement.",
     iconName: "Radio",
-    bgImage: "/images/live s.jpg",
+    bgImage: "/images/hero-camera.jpg",
     features: [
       "Multi Camera Production",
       "YouTube Live Broadcast",

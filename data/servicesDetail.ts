@@ -70,7 +70,7 @@ export const servicesDetailed: Record<string, DetailedService> = {
       "Using state-of-the-art Sony Alpha & FX cinema cameras, Blackmagic ATEM live switchers, bonded multi-SIM cellular 5G networks, and wireless video transmitters, we eliminate buffering and signal dropouts even in remote or packed venues.",
       "Your audience on YouTube, Facebook, Twitch, or private portals will experience crisp 1080p60/4K video, crystal-clear multi-channel wireless audio, real-time dynamic scoreboards or lower-third graphics, and instant replay highlights."
     ],
-    bgImage: "/images/live s.jpg",
+    bgImage: "/images/hero-camera.jpg",
     secondaryImage: "/images/service-streaming.png",
     iconName: "Radio",
     stats: [

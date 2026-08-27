@@ -33,7 +33,7 @@ export const portfolioItems: PortfolioItem[] = [
     id: "tech-summit-live",
     title: "Global Tech Summit 2026",
     category: "Live Streaming",
-    image: "/images/live s.jpg",
+    image: "/images/hero-camera.jpg",
     videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-recording-a-live-stream-of-a-speaker-41584-large.mp4",
     client: "NextGen Technologies",
     date: "March 2026",

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import * as Icons from "lucide-react";
@@ -19,6 +19,11 @@ interface ServiceDetailViewProps {
 
 export default function ServiceDetailView({ service }: ServiceDetailViewProps) {
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
+
+  // Force scroll window to the top on page mount or when the service slug changes
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [service.slug]);
 
   // Other services (excluding the current one)
   const otherServices = services.filter((s) => s.id !== service.slug);
