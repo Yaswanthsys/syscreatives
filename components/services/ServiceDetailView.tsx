@@ -22,7 +22,7 @@ export default function ServiceDetailView({ service }: ServiceDetailViewProps) {
 
   // Force scroll window to the top on page mount or when the service slug changes
   useEffect(() => {
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" as ScrollBehavior });
   }, [service.slug]);
 
   // Other services (excluding the current one)

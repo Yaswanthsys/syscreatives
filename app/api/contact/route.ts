@@ -23,7 +23,7 @@ export async function POST(req: Request) {
     }
 
     const resend = new Resend(resendApiKey);
-    const targetRecipient = "yaswanth777ys@gmail.com";
+    const targetRecipient = "syscreatives@gmail.com";
 
     // 1. Trigger Resend API call to notify the studio team (Yaswanth)
     const { data: teamData, error: teamError } = await resend.emails.send({

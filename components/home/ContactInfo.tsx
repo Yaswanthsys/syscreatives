@@ -22,16 +22,10 @@ export default function ContactInfo() {
     },
     {
       title: "Email Studio",
-      value: "yaswanth777ys@gmail.com",
+      value: "syscreatives@gmail.com",
       description: "Send project briefs and proposals.",
       icon: Mail,
-      actionHref: "mailto:srinupanja@gmail.com"
-    },
-    {
-      title: "Studio",
-      value: "Someswaram",
-      description: "Rayavram",
-      icon: MapPin
+      actionHref: "mailto:syscreatives@gmail.com"
     },
     {
       title: "Working Hours",
@@ -44,18 +38,15 @@ export default function ContactInfo() {
   return (
     <div className="flex flex-col gap-6 h-full text-left">
       {/* Contact Cards Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-        {contactDetails.map((detail, idx) => {
+      <div className="grid grid-cols-1 gap-6">
+        {contactDetails.map((detail) => {
           const Icon = detail.icon;
           const Wrapper = detail.actionHref ? "a" : "div";
-          const isFullWidth = idx === 4; // Make the last card (Working Hours) full-width
 
           return (
             <Card
               key={detail.title}
-              className={`p-6 h-full flex flex-col justify-between group ${
-                isFullWidth ? "sm:col-span-2" : ""
-              }`}
+              className="p-6 h-full flex flex-col justify-between group"
             >
               <Wrapper
                 {...(detail.actionHref ? { href: detail.actionHref, target: "_blank", rel: "noopener noreferrer" } : {})}

@@ -127,40 +127,20 @@ export default function About() {
             </div>
           </div>
 
-          {/* Right Column: Overlapping Images */}
-          <div className="lg:col-span-5 relative flex items-center justify-center h-[350px] sm:h-[450px]">
-            {/* Card 1: The Team (Background) */}
+          {/* Right Column: Simple Centered Flat Logo */}
+          <div className="lg:col-span-5 flex items-center justify-center min-h-[350px] sm:min-h-[450px] p-6">
             <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
+              initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className="absolute top-[5%] left-[5%] w-[70%] aspect-[4/3] rounded-2xl overflow-hidden border border-white/[0.08] bg-[#1D1D1D] shadow-2xl z-10 group"
+              className="relative w-full max-w-[280px] sm:max-w-[340px] flex items-center justify-center"
             >
-              <div
-                className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
-                style={{ backgroundImage: `url('/images/about-team.png')` }}
+              <img
+                src="/images/about-logo-flat.png"
+                alt="SYS Creatives Logo"
+                className="w-full h-auto object-contain max-h-[300px]"
               />
-              <div className="absolute inset-0 bg-black/30" />
-            </motion.div>
-
-            {/* Card 2: The Gear (Foreground) */}
-            <motion.div
-              initial={{ opacity: 0, x: 40 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="absolute bottom-[5%] right-[5%] w-[65%] aspect-[4/3] rounded-2xl overflow-hidden border border-white/[0.08] bg-[#1D1D1D] shadow-[0_15px_40px_rgba(0,0,0,0.5)] z-20 group"
-            >
-              <div
-                className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
-                style={{ backgroundImage: `url('/images/about-equipment.png')` }}
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
-              <div className="absolute bottom-4 left-4 right-4">
-                <span className="text-[10px] text-gold font-bold uppercase tracking-wider block">Redundancy Rig</span>
-                <span className="text-white text-xs font-semibold">Cinema Encoder Array</span>
-              </div>
             </motion.div>
           </div>
 

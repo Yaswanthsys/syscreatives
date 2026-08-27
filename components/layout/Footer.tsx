@@ -120,15 +120,12 @@ export default function Footer() {
             </li>
             <li className="flex items-start gap-3">
               <Mail className="h-4.5 w-4.5 text-gold mt-1 shrink-0" />
-              <p className="text-sm text-[#9CA3AF] hover:text-white transition-colors duration-300">
-                yaswanth777ys@gmail.com
-              </p>
-            </li>
-            <li className="flex items-start gap-3">
-              <MapPin className="h-4.5 w-4.5 text-gold mt-1 shrink-0" />
-              <p className="text-sm text-[#9CA3AF] leading-relaxed">
-                Someswaram,Rayavarm
-              </p>
+              <a
+                href="mailto:syscreatives@gmail.com"
+                className="text-sm text-[#9CA3AF] hover:text-white transition-colors duration-300"
+              >
+                syscreatives@gmail.com
+              </a>
             </li>
           </ul>
         </div>
