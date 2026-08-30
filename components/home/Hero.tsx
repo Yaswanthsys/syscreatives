@@ -221,18 +221,7 @@ export default function Hero() {
       <Container className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-8 items-center h-full w-full">
         {/* Left Column Content */}
         <div className="lg:col-span-6 flex flex-col text-left">
-          {/* Badge */}
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="flex items-center gap-2.5 mb-6"
-          >
-            <span className="h-[1px] w-8 bg-gold" />
-            <span className="text-[10px] sm:text-xs font-bold text-gold uppercase tracking-[0.2em] font-sans">
-              Creative Solutions. Technical Excellence.
-            </span>
-          </motion.div>
+
 
           {/* Heading */}
           <motion.h1
