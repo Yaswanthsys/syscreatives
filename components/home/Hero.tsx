@@ -5,6 +5,8 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
   ArrowRight, 
+  ChevronLeft, 
+  ChevronRight,
   Radio, 
   Film, 
   Code, 
@@ -34,61 +36,63 @@ export default function Hero() {
     };
   }, []);
 
-  // Specialties data with matching icons
-  const specialties = [
-    { name: "Live Streaming", icon: Radio, slug: "live-streaming" },
-    { name: "Video Editing", icon: Film, slug: "video-editing" },
-    { name: "Web Development", icon: Code, slug: "web-development" },
-    { name: "Graphic Design", icon: Palette, slug: "graphic-design" },
-    { name: "QR Photo Scanning", icon: QrCode, slug: "qr-photo-scanning" }
-  ];
-
-  // Carousel card configs
-  const carouselCards = [
+  // Comprehensive Services Data with descriptions, slugs, icons, and metrics
+  const servicesData = [
     {
       id: "live-streaming",
       title: "Live Streaming",
-      badge: "01. LIVE STREAMING",
+      subtitle: "High-End Live Broadcasts",
+      badge: "01. LIVE BROADCAST",
+      icon: Radio,
       image: "/images/service-streaming.png",
-      slug: "live-streaming"
+      slug: "live-streaming",
+      description: "Professional multi-camera live streaming solutions designed for corporate events, luxury weddings, and high-profile summits with zero latency and ultra-HD quality.",
+      stats: { primary: "10Gbps", label: "Redundant Bandwidth", secondary: "4K UHD", label2: "Streaming Output" }
     },
     {
       id: "video-editing",
       title: "Video Editing",
+      subtitle: "Cinematic Post-Production",
       badge: "02. CINEMATIC EDIT",
+      icon: Film,
       image: "/images/service-editing.png",
-      slug: "video-editing"
+      slug: "video-editing",
+      description: "Expert color grading, sound design, and narrative-driven video editing that elevates raw footage into compelling cinematic brand stories and highlight reels.",
+      stats: { primary: "10bit+", label: "Color Grading", secondary: "Dolby", label2: "Atmospheric Sound" }
     },
     {
       id: "web-development",
       title: "Web Development",
-      badge: "03. WEB DEVELOPMENT",
+      subtitle: "Premium Digital Interfaces",
+      badge: "03. PREMIUM CODE",
+      icon: Code,
       image: "/images/service-web.png",
-      slug: "web-development"
+      slug: "web-development",
+      description: "Custom headless web development utilizing modern React frameworks. We build ultra-fast, search-optimized websites with bespoke animations and fluid UX.",
+      stats: { primary: "100ms", label: "Average Response", secondary: "100%", label2: "Lighthouse Performance" }
     },
     {
       id: "graphic-design",
       title: "Graphic Design",
+      subtitle: "Luxury Brand Identity",
       badge: "04. VISUAL BRANDING",
+      icon: Palette,
       image: "/images/service-design.png",
-      slug: "graphic-design"
+      slug: "graphic-design",
+      description: "Comprehensive visual branding, mockup design, and logo identities that capture your brand essence and communicate premium value across all media assets.",
+      stats: { primary: "3D", label: "Mockup Renders", secondary: "Premium", label2: "Print Finish Guides" }
     },
     {
       id: "qr-photo-scanning",
       title: "QR Photo Scanning",
-      badge: "05. QR PHOTO SCANNING",
+      subtitle: "AI-Powered Photo Sharing",
+      badge: "05. AI PHOTO SHARING",
+      icon: QrCode,
       image: "/images/service-qr.png",
-      slug: "qr-photo-scanning"
+      slug: "qr-photo-scanning",
+      description: "Real-time AI-powered photo scanning and sharing platforms for high-end events, allowing guests to instantly download their professional portraits via dynamic QR codes.",
+      stats: { primary: "Instant", label: "QR Delivery", secondary: "AI", label2: "Face Recognition" }
     }
-  ];
-
-  // Matching 3D gear objects to display at the bottom
-  const gearElements = [
-    { image: "/images/element-camera.png", name: "Broadcast Camera" },
-    { image: "/images/element-headphones.png", name: "Studio Headphones" },
-    { image: "/images/element-keyboard.png", name: "Mechanical Keyboard" },
-    { image: "/images/element-stylus.png", name: "Stylus Pen" },
-    { image: "/images/element-phone.png", name: "Smartphone" }
   ];
 
   // Stats bar data
@@ -99,12 +103,12 @@ export default function Hero() {
     { value: "24/7", label: "Support Available", icon: Globe }
   ];
 
-  // Start Autoplay Loop (Right to Left rotation)
+  // Start Autoplay Loop
   const startAutoplay = () => {
     stopAutoplay();
     autoplayTimerRef.current = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % 5);
-    }, 4500); // Rotate every 4.5 seconds
+      setActiveIndex((prev) => (prev + 1) % servicesData.length);
+    }, 5500); // 5.5s autoplay rotation
   };
 
   const stopAutoplay = () => {
@@ -120,68 +124,98 @@ export default function Hero() {
 
   const handleManualSelect = (index: number) => {
     setActiveIndex(index);
-    startAutoplay(); // Reset autoplay timer on click
+    startAutoplay();
   };
 
-  // Helper to compute card offsets along a 3D circular ellipse
+  const handleNext = () => {
+    setActiveIndex((prev) => (prev + 1) % servicesData.length);
+    startAutoplay();
+  };
+
+  const handlePrev = () => {
+    setActiveIndex((prev) => (prev - 1 + servicesData.length) % servicesData.length);
+    startAutoplay();
+  };
+
+  // Helper to compute card offsets along a 3D circular Coverflow Cylinder
   const getCardStyle = (index: number) => {
     let diff = index - activeIndex;
-    if (diff < -2) diff += 5;
-    if (diff > 2) diff -= 5;
+    if (diff < -2) diff += servicesData.length;
+    if (diff > 2) diff -= servicesData.length;
 
     const isActive = diff === 0;
     
     let x = 0;
-    let y = 0;
+    let z = 0;
     let scale = 1;
     let opacity = 1;
-    let zIndex = 10;
     let rotateY = 0;
+    let zIndex = 10;
 
-    // Ellipse layouts
-    if (diff === 0) {
-      x = 0;
-      y = 0;
-      scale = 1.05;
-      opacity = 1;
-      zIndex = 30;
-    } else if (diff === 1) {
-      x = isMobile ? 80 : 130;
-      y = isMobile ? -5 : -10;
-      scale = isMobile ? 0.85 : 0.82;
-      opacity = 0.7;
-      zIndex = 20;
-      rotateY = -15;
-    } else if (diff === -1) {
-      x = isMobile ? -80 : -130;
-      y = isMobile ? -5 : -10;
-      scale = isMobile ? 0.85 : 0.82;
-      opacity = 0.7;
-      zIndex = 20;
-      rotateY = 15;
-    } else if (diff === 2) {
-      x = isMobile ? 140 : 220;
-      y = isMobile ? -10 : -25;
-      scale = isMobile ? 0.7 : 0.65;
-      opacity = 0.35;
-      zIndex = 10;
-      rotateY = -30;
-    } else if (diff === -2) {
-      x = isMobile ? -140 : -220;
-      y = isMobile ? -10 : -25;
-      scale = isMobile ? 0.7 : 0.65;
-      opacity = 0.35;
-      zIndex = 10;
-      rotateY = 30;
+    if (isMobile) {
+      // Mobile optimization: Show only the active center card, hide other cards to prevent page overflow
+      if (diff === 0) {
+        x = 0;
+        z = 0;
+        scale = 1;
+        opacity = 1;
+        zIndex = 30;
+        rotateY = 0;
+      } else {
+        x = 0;
+        z = -100;
+        scale = 0.85;
+        opacity = 0;
+        zIndex = 10;
+        rotateY = 0;
+      }
+    } else {
+      // Desktop full 3D Coverflow Cylinder layouts
+      if (diff === 0) {
+        x = 0;
+        z = 120;
+        scale = 1.05;
+        opacity = 1;
+        zIndex = 30;
+        rotateY = 0;
+      } else if (diff === 1) {
+        x = 155;
+        z = 0;
+        scale = 0.82;
+        opacity = 0.65;
+        zIndex = 20;
+        rotateY = -35;
+      } else if (diff === -1) {
+        x = -155;
+        z = 0;
+        scale = 0.82;
+        opacity = 0.65;
+        zIndex = 20;
+        rotateY = 35;
+      } else if (diff === 2) {
+        x = 270;
+        z = -100;
+        scale = 0.65;
+        opacity = 0.25;
+        zIndex = 10;
+        rotateY = -55;
+      } else if (diff === -2) {
+        x = -270;
+        z = -100;
+        scale = 0.65;
+        opacity = 0.25;
+        zIndex = 10;
+        rotateY = 55;
+      }
     }
 
-    return { x, y, scale, opacity, zIndex, rotateY, isActive };
+    return { x, z, scale, opacity, rotateY, zIndex, isActive };
   };
 
   return (
     <section
       id="home"
-      className="relative min-h-screen flex flex-col justify-center pt-28 pb-36 overflow-hidden bg-[#0F0F0F]"
+      className="relative min-h-screen flex flex-col justify-center pt-24 pb-48 lg:pb-36 overflow-hidden bg-[#0F0F0F]"
     >
       {/* Background Ambient Glows */}
       <div className="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-gold/5 blur-[120px] pointer-events-none" />
@@ -211,7 +245,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.1 }}
-            className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white tracking-tight leading-[1.1] mb-6"
+            className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white tracking-tight leading-[1.1] mb-6 animate-gradient"
           >
             Where Creativity.<br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold via-yellow-200 to-white">
@@ -219,38 +253,68 @@ export default function Hero() {
             </span>
           </motion.h1>
 
-          {/* Description */}
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.2 }}
-            className="text-base sm:text-lg text-[#9CA3AF] max-w-xl leading-relaxed mb-8"
+          {/* dynamic Service detail card info */}
+          <motion.div
+            key={activeIndex}
+            initial={{ opacity: 0, x: -10 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 10 }}
+            transition={{ duration: 0.4 }}
+            className="bg-white/[0.02] border border-white/[0.06] rounded-2xl p-6 backdrop-blur-md max-w-xl mb-8"
           >
-            Professional media solutions designed for high-end events. We combine cinematic post-production with state-of-the-art live broadcasting and interactive design.
-          </motion.p>
+            <span className="text-[10px] font-bold text-gold uppercase tracking-[0.2em] block mb-2">
+              {servicesData[activeIndex].badge}
+            </span>
+            <h2 className="text-xl sm:text-2xl font-bold text-white mb-3">
+              {servicesData[activeIndex].subtitle}
+            </h2>
+            <p className="text-sm text-[#9CA3AF] leading-relaxed mb-6">
+              {servicesData[activeIndex].description}
+            </p>
+            
+            {/* Dynamic metrics */}
+            <div className="grid grid-cols-2 gap-4 border-t border-white/[0.06] pt-4">
+              <div>
+                <span className="text-lg font-extrabold text-white block">
+                  {servicesData[activeIndex].stats.primary}
+                </span>
+                <span className="text-[10px] text-[#9CA3AF] uppercase tracking-wider">
+                  {servicesData[activeIndex].stats.label}
+                </span>
+              </div>
+              <div>
+                <span className="text-lg font-extrabold text-white block">
+                  {servicesData[activeIndex].stats.secondary}
+                </span>
+                <span className="text-[10px] text-[#9CA3AF] uppercase tracking-wider">
+                  {servicesData[activeIndex].stats.label2}
+                </span>
+              </div>
+            </div>
+          </motion.div>
 
-          {/* Specialization Selection Grid */}
+          {/* Specialties navigation tab buttons */}
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.3 }}
-            className="flex flex-wrap gap-3 max-w-xl mb-10"
+            className="flex flex-wrap gap-2.5 max-w-xl mb-8"
           >
-            {specialties.map((spec, idx) => {
+            {servicesData.map((spec, idx) => {
               const Icon = spec.icon;
               const isActive = activeIndex === idx;
               return (
                 <button
-                  key={spec.name}
+                  key={spec.id}
                   onClick={() => handleManualSelect(idx)}
-                  className={`flex items-center gap-3 px-4 py-2.5 rounded-xl border transition-all duration-300 cursor-pointer ${
+                  className={`flex items-center gap-2.5 px-3 py-2 rounded-xl border transition-all duration-300 cursor-pointer ${
                     isActive
-                      ? "bg-gold/10 border-gold text-gold shadow-[0_0_15px_rgba(212,175,55,0.15)]"
+                      ? "bg-gold/10 border-gold text-gold shadow-[0_0_15px_rgba(212,175,55,0.1)]"
                       : "bg-white/[0.02] border-white/[0.08] text-[#9CA3AF] hover:bg-white/[0.05] hover:border-white/[0.15] hover:text-white"
                   }`}
                 >
-                  <Icon className={`h-4.5 w-4.5 ${isActive ? "text-gold" : "text-[#9CA3AF]"}`} />
-                  <span className="text-xs sm:text-sm font-medium tracking-wide">{spec.name}</span>
+                  <Icon className={`h-4 w-4 ${isActive ? "text-gold" : "text-[#9CA3AF]"}`} />
+                  <span className="text-xs font-semibold tracking-wide">{spec.title}</span>
                 </button>
               );
             })}
@@ -281,103 +345,105 @@ export default function Hero() {
           </motion.div>
         </div>
 
-        {/* Right Column: 3D Stage Carousel */}
-        <div className="lg:col-span-6 relative flex justify-center items-center h-[420px] sm:h-[520px] w-full">
-          {/* Main Stage Setup */}
-          <div className="relative w-full max-w-[500px] h-full flex flex-col items-center justify-center perspective-[1000px]">
-            
-            {/* 1. Backdrop Pedestal Panel with Glowing Logo */}
-            <div className="absolute top-[8%] w-[280px] h-[310px] rounded-3xl border border-white/[0.08] bg-[#161616]/90 backdrop-blur-md shadow-2xl flex flex-col items-center justify-start pt-6 z-0 overflow-hidden">
-              {/* Radial gold neon glow behind logo */}
-              <div className="absolute top-[-10%] w-[150px] h-[150px] rounded-full bg-gold/10 blur-[30px] pointer-events-none" />
-              {/* Gold vertical bar accents on left/right */}
-              <div className="absolute left-0 top-0 bottom-0 w-[2px] bg-gradient-to-b from-transparent via-gold/50 to-transparent" />
-              <div className="absolute right-0 top-0 bottom-0 w-[2px] bg-gradient-to-b from-transparent via-gold/50 to-transparent" />
-              
-              <div className="relative z-10 flex flex-col items-center">
-                {/* Logo graphics */}
-                <div className="h-12 w-12 rounded-xl bg-gold/10 border border-gold/25 flex items-center justify-center mb-3">
-                  <span className="text-gold font-black text-xl tracking-tighter">S</span>
-                </div>
-                <h3 className="text-white text-base font-extrabold tracking-[0.2em] font-sans">SYS CREATIVES</h3>
-                <p className="text-[9px] text-[#9CA3AF] uppercase tracking-widest mt-1">Studio Stage</p>
-              </div>
-            </div>
-
-            {/* 2. Circular Rotating Service Cards */}
-            <div className="absolute top-[35%] w-full h-[220px] flex items-center justify-center z-10">
-              {carouselCards.map((card, idx) => {
-                const { x, y, scale, opacity, zIndex, rotateY, isActive } = getCardStyle(idx);
+        {/* Right Column: 3D Coverflow Carousel Showcase */}
+        <div className="lg:col-span-6 relative flex flex-col justify-center items-center h-[450px] sm:h-[530px] w-full">
+          
+          {/* True 3D spatial perspective wrapper */}
+          <div 
+            className="relative w-full max-w-[520px] h-[360px] flex items-center justify-center"
+            style={{ perspective: "1200px" }}
+          >
+            <div 
+              className="relative w-full h-full flex items-center justify-center"
+              style={{ transformStyle: "preserve-3d" }}
+            >
+              {servicesData.map((card, idx) => {
+                const { x, z, scale, opacity, rotateY, zIndex, isActive } = getCardStyle(idx);
                 return (
                   <motion.div
                     key={card.id}
                     animate={{
                       x,
-                      y,
+                      z,
                       scale,
                       opacity,
-                      zIndex,
-                      rotateY
+                      rotateY,
+                      zIndex
                     }}
                     transition={{
                       type: "spring",
-                      stiffness: 70,
+                      stiffness: 85,
                       damping: 18
                     }}
+                    style={{ 
+                      transformStyle: "preserve-3d",
+                      backfaceVisibility: "hidden"
+                    }}
                     onClick={() => handleManualSelect(idx)}
-                    className={`absolute w-[180px] aspect-[4/3] rounded-2xl overflow-hidden border bg-[#1D1D1D]/90 backdrop-blur-md shadow-2xl group cursor-pointer ${
+                    className={`absolute w-[240px] sm:w-[270px] aspect-[3/4] rounded-2xl overflow-hidden border bg-[#121212] shadow-[0_20px_50px_rgba(0,0,0,0.8)] group cursor-pointer ${
                       isActive 
-                        ? "border-gold/50 ring-1 ring-gold/20" 
+                        ? "border-gold/60 ring-2 ring-gold/15" 
                         : "border-white/[0.08] hover:border-white/20"
                     }`}
-                    style={{ transformStyle: "preserve-3d" }}
                   >
                     <Link href={`/services/${card.slug}`} className="block w-full h-full" onClick={(e) => {
                       if (!isActive) {
-                        // Prevent navigation if card is not active front-center (let click select it first)
-                        e.preventDefault();
+                        e.preventDefault(); // Click selects card first, double-click or active card link navigates
                       }
                     }}>
+                      {/* Image background with zoom on hover */}
                       <div 
                         className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" 
                         style={{ backgroundImage: `url('${card.image}')` }} 
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
-                      <div className="absolute bottom-3 left-3.5 right-3.5">
-                        <span className="text-[8px] text-gold font-bold uppercase tracking-wider block mb-0.5">{card.badge}</span>
-                        <h4 className="text-white text-[11px] font-bold tracking-wide">{card.title}</h4>
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent" />
+                      
+                      {/* Card Content overlay */}
+                      <div className="absolute bottom-4 left-4 right-4">
+                        <span className="text-[8px] text-gold font-bold uppercase tracking-wider block mb-1">
+                          {card.badge}
+                        </span>
+                        <h4 className="text-white text-sm font-bold tracking-wide">
+                          {card.title}
+                        </h4>
                       </div>
                     </Link>
                   </motion.div>
                 );
               })}
             </div>
-
-            {/* 3. Circular Podium base */}
-            <div className="absolute bottom-[10%] w-[340px] h-[34px] rounded-full bg-[#1C1C1C] border border-white/[0.08] flex items-center justify-center z-5 shadow-[0_15px_30px_rgba(0,0,0,0.6)]">
-              {/* Outer gold neon ring */}
-              <div className="absolute inset-[-4px] rounded-full border border-gold/15 blur-[2px] animate-pulse-slow" />
-              {/* Inner dark pedestal */}
-              <div className="w-[310px] h-[22px] rounded-full bg-[#121212] border border-white/[0.05] shadow-inner" />
-            </div>
-
-            {/* 4. Dynamic Gear Object at the bottom */}
-            <div className="absolute bottom-[2%] w-[160px] h-[160px] z-20 pointer-events-none flex items-center justify-center">
-              <AnimatePresence mode="wait">
-                <motion.img
-                  key={activeIndex}
-                  src={gearElements[activeIndex].image}
-                  alt={gearElements[activeIndex].name}
-                  initial={{ opacity: 0, y: 25, scale: 0.8 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: -15, scale: 0.8 }}
-                  transition={{ duration: 0.5, ease: "easeOut" }}
-                  className="w-full h-full object-contain filter drop-shadow-[0_15px_25px_rgba(212,175,55,0.2)]"
-                />
-              </AnimatePresence>
-            </div>
-            
           </div>
+
+          {/* 3D coverflow controls (Next/Prev buttons & Pagination indicators) */}
+          <div className="flex items-center gap-6 mt-6 z-40">
+            <button 
+              onClick={handlePrev}
+              className="h-9 w-9 rounded-full bg-white/[0.03] border border-white/[0.08] flex items-center justify-center text-[#9CA3AF] hover:bg-gold hover:text-black hover:border-gold transition-all duration-300 cursor-pointer"
+            >
+              <ChevronLeft className="h-4.5 w-4.5" />
+            </button>
+            
+            {/* Pagination Lines */}
+            <div className="flex items-center gap-1.5">
+              {servicesData.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => handleManualSelect(i)}
+                  className={`h-1 rounded-full transition-all duration-300 cursor-pointer ${
+                    activeIndex === i ? "w-6 bg-gold" : "w-2 bg-white/20"
+                  }`}
+                />
+              ))}
+            </div>
+
+            <button 
+              onClick={handleNext}
+              className="h-9 w-9 rounded-full bg-white/[0.03] border border-white/[0.08] flex items-center justify-center text-[#9CA3AF] hover:bg-gold hover:text-black hover:border-gold transition-all duration-300 cursor-pointer"
+            >
+              <ChevronRight className="h-4.5 w-4.5" />
+            </button>
+          </div>
+
         </div>
       </Container>
 
