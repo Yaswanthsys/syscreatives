@@ -95,13 +95,7 @@ export default function Hero() {
     }
   ];
 
-  // Stats bar data
-  const statsData = [
-    { value: "150+", label: "Projects Completed", icon: Users },
-    { value: "98%", label: "Client Satisfaction", icon: Star },
-    { value: "5+", label: "Years Experience", icon: Clock },
-    { value: "24/7", label: "Support Available", icon: Globe }
-  ];
+
 
   // Start Autoplay Loop
   const startAutoplay = () => {
@@ -371,9 +365,8 @@ export default function Hero() {
                       zIndex
                     }}
                     transition={{
-                      type: "spring",
-                      stiffness: 85,
-                      damping: 18
+                      duration: 0.8,
+                      ease: [0.16, 1, 0.3, 1] // Ultra-smooth cubic-bezier deceleration
                     }}
                     style={{ 
                       transformStyle: "preserve-3d",
@@ -446,37 +439,6 @@ export default function Hero() {
 
         </div>
       </Container>
-
-      {/* Bottom Horizontal Stats Bar */}
-      <div className="absolute bottom-6 left-0 right-0 z-20 pointer-events-none">
-        <Container>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
-            className="w-full bg-[#181818]/60 backdrop-blur-md border border-white/[0.06] rounded-2xl py-6 px-8 flex flex-col md:flex-row items-center justify-between gap-6 md:gap-4 pointer-events-auto shadow-2xl"
-          >
-            {statsData.map((stat, i) => {
-              const StatIcon = stat.icon;
-              return (
-                <div key={i} className="flex items-center gap-4 text-left w-full md:w-auto md:justify-center">
-                  <div className="h-10 w-10 rounded-xl bg-gold/10 border border-gold/25 flex items-center justify-center text-gold">
-                    <StatIcon className="h-5 w-5" />
-                  </div>
-                  <div>
-                    <div className="text-xl sm:text-2xl font-extrabold text-white tracking-tight leading-none mb-1">
-                      {stat.value}
-                    </div>
-                    <div className="text-xs text-[#9CA3AF] font-medium tracking-wide uppercase">
-                      {stat.label}
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </motion.div>
-        </Container>
-      </div>
 
     </section>
   );
