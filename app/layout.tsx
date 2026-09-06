@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
+import { BookingProvider } from "@/context/BookingContext";
+import BookingModal from "@/components/ui/BookingModal";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -23,9 +25,11 @@ export default function RootLayout({
       <body className="font-sans bg-[#0F0F0F] min-h-full flex flex-col selection:bg-gold selection:text-black">
         {/* Subtle cinematic film-grain noise overlay */}
         <div className="fixed inset-0 z-[99] pointer-events-none opacity-[0.015] bg-noise bg-repeat" />
-        {children}
+        <BookingProvider>
+          {children}
+          <BookingModal />
+        </BookingProvider>
       </body>
     </html>
   );
 }
-

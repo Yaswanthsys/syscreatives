@@ -12,12 +12,14 @@ import Card from "@/components/ui/Card";
 import SectionTitle from "@/components/ui/SectionTitle";
 import ContactForm from "@/components/home/ContactForm";
 import ContactInfo from "@/components/home/ContactInfo";
+import { useBookingModal } from "@/context/BookingContext";
 
 interface ServiceDetailViewProps {
   service: DetailedService;
 }
 
 export default function ServiceDetailView({ service }: ServiceDetailViewProps) {
+  const { openBookingModal } = useBookingModal();
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
 
   // Force scroll window to the top on page mount or when the service slug changes
@@ -100,7 +102,7 @@ export default function ServiceDetailView({ service }: ServiceDetailViewProps) {
 
               {/* CTAs */}
               <div className="flex flex-wrap items-center gap-4 sm:gap-6">
-                <Button variant="gold" size="lg" onClick={scrollToContact} className="group shadow-lg shadow-gold/10">
+                <Button variant="gold" size="lg" onClick={() => openBookingModal(service.title)} className="group shadow-lg shadow-gold/10">
                   <span>Book This Service</span>
                   <Icons.ArrowRight className="h-4 w-4 ml-2 transition-transform duration-300 group-hover:translate-x-1" />
                 </Button>
@@ -355,8 +357,8 @@ export default function ServiceDetailView({ service }: ServiceDetailViewProps) {
                     </p>
                     <Button
                       variant={pkg.isPopular ? "gold" : "outline"}
-                      className="w-full"
-                      onClick={scrollToContact}
+                      className="w-full cursor-pointer"
+                      onClick={() => openBookingModal(`${service.title} - ${pkg.name}`)}
                     >
                       Select This Package
                     </Button>

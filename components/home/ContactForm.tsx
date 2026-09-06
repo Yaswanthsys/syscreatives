@@ -20,6 +20,7 @@ export default function ContactForm({ defaultService }: ContactFormProps = {}) {
   });
 
   const [errors, setErrors] = useState<FormErrors>({});
+  const [serverError, setServerError] = useState<string | null>(null);
   const [submitStatus, setSubmitStatus] = useState<"idle" | "loading" | "success">("idle");
 
   const validateForm = (): boolean => {
@@ -88,6 +89,7 @@ export default function ContactForm({ defaultService }: ContactFormProps = {}) {
 
       if (response.ok) {
         setSubmitStatus("success");
+        setServerError(null);
         setFormData({
           fullName: "",
           mobileNumber: "",
@@ -97,12 +99,12 @@ export default function ContactForm({ defaultService }: ContactFormProps = {}) {
         });
       } else {
         const errorData = await response.json();
-        alert(errorData.error || "Failed to submit request. Please try again.");
+        setServerError(errorData.error || "Failed to submit request. Please try again.");
         setSubmitStatus("idle");
       }
     } catch (err) {
       console.error("Error submitting contact form:", err);
-      alert("A network connection error occurred. Please verify your connection and try again.");
+      setServerError("A network connection error occurred. Please verify your connection and try again.");
       setSubmitStatus("idle");
     }
   };
@@ -148,6 +150,14 @@ export default function ContactForm({ defaultService }: ContactFormProps = {}) {
             className="flex flex-col gap-6"
             noValidate
           >
+            {/* Inline Error Alert */}
+            {serverError && (
+              <div className="p-4 rounded-2xl bg-red-500/10 border border-red-500/30 text-red-400 text-xs text-left leading-relaxed flex items-start gap-2.5">
+                <AlertCircle className="h-4 w-4 shrink-0 mt-0.5" />
+                <span>{serverError}</span>
+              </div>
+            )}
+
             <div className="text-left">
               <h3 className="text-xl sm:text-2xl font-bold text-white mb-2">Request Our Services</h3>
               <p className="text-xs sm:text-sm text-[#9CA3AF]">Fill in the fields below to schedule a luxury consultation.</p>

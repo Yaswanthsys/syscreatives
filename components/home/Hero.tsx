@@ -19,8 +19,10 @@ import {
 } from "lucide-react";
 import Button from "@/components/ui/Button";
 import Container from "@/components/ui/Container";
+import { useBookingModal } from "@/context/BookingContext";
 
 export default function Hero() {
+  const { openBookingModal } = useBookingModal();
   const [isMobile, setIsMobile] = useState(true);
   const [activeIndex, setActiveIndex] = useState(0);
   const autoplayTimerRef = useRef<NodeJS.Timeout | null>(null);
@@ -310,12 +312,15 @@ export default function Hero() {
             transition={{ duration: 0.7, delay: 0.4 }}
             className="flex flex-wrap items-center gap-4 sm:gap-6"
           >
-            <a href="#contact">
-              <Button variant="gold" size="lg" className="group shadow-lg shadow-gold/10">
-                <span>Request Service</span>
-                <ArrowRight className="h-4 w-4 ml-1 transition-transform duration-300 group-hover:translate-x-1" />
-              </Button>
-            </a>
+            <Button
+              variant="gold"
+              size="lg"
+              onClick={() => openBookingModal(servicesData[activeIndex]?.title)}
+              className="group shadow-lg shadow-gold/10 cursor-pointer"
+            >
+              <span>Request Service</span>
+              <ArrowRight className="h-4 w-4 ml-1 transition-transform duration-300 group-hover:translate-x-1" />
+            </Button>
             <Link
               href="/services"
               className="inline-flex items-center gap-2 text-sm text-white font-semibold hover:text-gold transition-colors duration-300"

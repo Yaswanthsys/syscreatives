@@ -8,8 +8,10 @@ import { motion, AnimatePresence } from "framer-motion";
 import { navItems } from "@/data/navigation";
 import Button from "@/components/ui/Button";
 import Container from "@/components/ui/Container";
+import { useBookingModal } from "@/context/BookingContext";
 
 export default function Navbar() {
+  const { openBookingModal } = useBookingModal();
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
@@ -82,11 +84,9 @@ export default function Navbar() {
 
         {/* Action Button */}
         <div className="hidden md:block">
-          <button onClick={() => handleLinkClick("#contact")}>
-            <Button variant="gold" size="sm">
-              Request Service
-            </Button>
-          </button>
+          <Button variant="gold" size="sm" onClick={() => openBookingModal()}>
+            Request Service
+          </Button>
         </div>
 
         {/* Mobile Hamburger Toggle */}
@@ -133,11 +133,16 @@ export default function Navbar() {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: navItems.length * 0.05 }}
             >
-              <button onClick={() => handleLinkClick("#contact")}>
-                <Button variant="gold" size="lg">
-                  Request Service
-                </Button>
-              </button>
+              <Button
+                variant="gold"
+                size="lg"
+                onClick={() => {
+                  setIsOpen(false);
+                  openBookingModal();
+                }}
+              >
+                Request Service
+              </Button>
             </motion.div>
           </motion.div>
         )}
