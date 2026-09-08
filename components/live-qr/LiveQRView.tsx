@@ -392,24 +392,27 @@ export default function LiveQRView({
               </div>
             </div>
 
-            <div className="flex flex-col gap-2">
-              <button
-                onClick={handleCopyLink}
-                className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl bg-gradient-to-r from-[#D4AF37] to-[#B8860B] text-black font-semibold text-xs sm:text-sm hover:brightness-105 active:scale-98 transition-all cursor-pointer shadow-xs"
-              >
-                {copied ? <Check className="w-4 h-4 text-emerald-900" /> : <Share2 className="w-4 h-4" />}
-                <span>{copied ? "Gallery Link Copied!" : "Copy Gallery Link"}</span>
-              </button>
-
+            <div className="flex flex-col gap-2.5 mt-1">
+              {/* Highlighted Primary Action: Open Gallery Directly */}
               <a
                 href={galleryUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full flex items-center justify-center gap-1.5 py-1.5 text-xs text-[#8C6D23] hover:text-[#5C4512] font-semibold underline underline-offset-4 transition-colors"
+                className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-gradient-to-r from-[#B8860B] via-[#D4AF37] to-[#996515] text-[#1A150D] font-bold text-xs sm:text-sm shadow-[0_4px_18px_rgba(212,175,55,0.4)] hover:brightness-105 active:scale-98 transition-all cursor-pointer group border border-[#F5E6B3]"
               >
-                <span>Or open gallery directly</span>
-                <ExternalLink className="w-3.5 h-3.5" />
+                <Sparkles className="w-4 h-4 text-[#1A150D]" />
+                <span className="tracking-wide">Open Gallery Directly</span>
+                <ExternalLink className="w-4 h-4 text-[#1A150D] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </a>
+
+              {/* Secondary Action: Copy Gallery Link */}
+              <button
+                onClick={handleCopyLink}
+                className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl bg-white hover:bg-[#FAF6F0] text-[#2C2621] border border-[#D4AF37]/45 font-semibold text-xs sm:text-sm active:scale-98 transition-all cursor-pointer shadow-2xs"
+              >
+                {copied ? <Check className="w-4 h-4 text-emerald-700" /> : <Share2 className="w-4 h-4 text-[#8C6D23]" />}
+                <span>{copied ? "Gallery Link Copied!" : "Copy Gallery Link"}</span>
+              </button>
 
               <button
                 onClick={() => setQrModalOpen(false)}
