@@ -7,7 +7,6 @@ import {
   Maximize2, 
   Minimize2, 
   ArrowLeft, 
-  QrCode, 
   Camera, 
   Youtube, 
   X, 
@@ -41,11 +40,13 @@ export interface EventConfig {
   blessingQuote?: string;
   childrenImage?: string;
   invitationCardImage?: string;
+  qrCodeImage?: string;
   youtubeLiveUrl?: string;
   youtubeVideoId?: string;
   galleryUrl?: string;
   whatsappNumber?: string;
   displayPhone?: string;
+  showWatchLive?: boolean;
 }
 
 export default function LiveQRView({
@@ -66,11 +67,13 @@ export default function LiveQRView({
   blessingQuote = "Children are a heritage from the Lord, offspring a reward from Him. — Psalm 127:3",
   childrenImage = "/live-qr/children-photo.jpg",
   invitationCardImage = "/live-qr/invitation-card.jpg",
+  qrCodeImage = "/live-qr/event-qr.png",
   youtubeLiveUrl = "https://www.youtube.com",
   youtubeVideoId = "M7lc1UVf-VE",
-  galleryUrl = "https://syscreatives.com/gallery",
+  galleryUrl = "https://e.dslr.app/selfie-search/c89e18fe-e0a3-4596-810e-5699e91fcc7a",
   whatsappNumber = "918500622735",
   displayPhone = "+91 85006 22735",
+  showWatchLive = false,
 }: EventConfig) {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [qrModalOpen, setQrModalOpen] = useState(false);
@@ -92,12 +95,36 @@ export default function LiveQRView({
     }
   };
 
-  const handleCopyLink = () => {
-    const url = typeof window !== "undefined" ? window.location.href : galleryUrl;
-    if (navigator.clipboard) {
-      navigator.clipboard.writeText(url);
+  const fallbackCopy = (text: string) => {
+    try {
+      const textArea = document.createElement("textarea");
+      textArea.value = text;
+      textArea.style.position = "fixed";
+      textArea.style.left = "-999999px";
+      textArea.style.top = "-999999px";
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+      document.execCommand("copy");
+      textArea.remove();
       setCopied(true);
       setTimeout(() => setCopied(false), 2500);
+    } catch (err) {
+      console.error("Copy failed:", err);
+    }
+  };
+
+  const handleCopyLink = () => {
+    const textToCopy = galleryUrl;
+    if (typeof navigator !== "undefined" && navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(textToCopy).then(() => {
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2500);
+      }).catch(() => {
+        fallbackCopy(textToCopy);
+      });
+    } else {
+      fallbackCopy(textToCopy);
     }
   };
 
@@ -239,40 +266,43 @@ export default function LiveQRView({
           </div>
 
           {/* ==============================================================
-              C. ACTION BUTTONS: YOUTUBE, GET PHOTOS & VIEW INVITATION
+              C. ACTION BUTTONS: GET PHOTOS & VIEW INVITATION
               ============================================================== */}
-          <div className="flex flex-row items-center justify-center gap-2.5 sm:gap-4 mt-3.5 sm:mt-4 w-full max-w-md">
-            {/* Button 1: Watch Live on YouTube */}
-            <button
-              onClick={() => setYoutubeModalOpen(true)}
-              className="flex-1 flex items-center justify-center gap-2 px-3 sm:px-5 py-2.5 sm:py-3.5 rounded-xl sm:rounded-2xl bg-gradient-to-r from-[#D71920] to-[#B31217] text-white font-semibold text-xs sm:text-sm shadow-[0_4px_18px_rgba(215,25,32,0.4)] hover:brightness-110 active:scale-95 transition-all group"
-            >
-              <div className="w-4 h-4 sm:w-5 sm:h-5 rounded-md bg-white/20 flex items-center justify-center group-hover:bg-white/30 transition-colors shrink-0">
-                <Youtube className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-white fill-white" />
-              </div>
-              <span className="whitespace-nowrap tracking-tight">
-                Watch Live on YouTube
-              </span>
-            </button>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mt-3.5 sm:mt-4 w-full max-w-xs sm:max-w-sm mx-auto">
+            {/* Optional Button 1: Watch Live on YouTube (Hidden by default) */}
+            {showWatchLive && (
+              <button
+                onClick={() => setYoutubeModalOpen(true)}
+                className="w-full flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-xl sm:rounded-2xl bg-gradient-to-r from-[#D71920] to-[#B31217] text-white font-semibold text-xs sm:text-sm shadow-[0_4px_18px_rgba(215,25,32,0.4)] hover:brightness-110 active:scale-95 transition-all group cursor-pointer"
+              >
+                <div className="w-4 h-4 sm:w-5 sm:h-5 rounded-md bg-white/20 flex items-center justify-center group-hover:bg-white/30 transition-colors shrink-0">
+                  <Youtube className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-white fill-white" />
+                </div>
+                <span className="whitespace-nowrap tracking-tight">
+                  Watch Live on YouTube
+                </span>
+              </button>
+            )}
 
-            {/* Button 2: Get Photos (AI Face Recognition Live QR) */}
+            {/* Button 2: Get Photos (Centered & prominent) */}
             <button
               onClick={() => setQrModalOpen(true)}
-              className="flex-1 flex items-center justify-center gap-2 px-3 sm:px-5 py-2.5 sm:py-3.5 rounded-xl sm:rounded-2xl bg-gradient-to-b from-[#FFFDF9] to-[#F3EEE3] border border-[#D4AF37]/50 text-[#2C2621] font-semibold text-xs sm:text-sm shadow-[0_4px_18px_rgba(212,175,55,0.25)] hover:border-[#D4AF37] active:scale-95 transition-all group"
+              className="w-full flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl sm:rounded-2xl bg-gradient-to-r from-[#B8860B] via-[#D4AF37] to-[#996515] text-[#1A150D] font-bold text-sm sm:text-base shadow-[0_6px_22px_rgba(212,175,55,0.4)] hover:brightness-105 active:scale-98 transition-all group border border-[#F5E6B3] cursor-pointer"
             >
-              <div className="w-4 h-4 sm:w-5 sm:h-5 rounded-md bg-[#2C2621]/10 flex items-center justify-center group-hover:bg-[#2C2621]/15 transition-colors shrink-0">
-                <Camera className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#2C2621]" />
+              <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-lg bg-black/10 flex items-center justify-center group-hover:bg-black/15 transition-colors shrink-0">
+                <Camera className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#1A150D]" />
               </div>
-              <span className="whitespace-nowrap tracking-tight">
+              <span className="whitespace-nowrap tracking-wide">
                 Get Photos
               </span>
+              <Sparkles className="w-3.5 h-3.5 text-[#1A150D] ml-0.5" />
             </button>
           </div>
 
           {/* Button 3: View Full Invitation Card */}
           <button
             onClick={() => setCardModalOpen(true)}
-            className="inline-flex items-center gap-1.5 mt-2 text-[11px] sm:text-xs text-[#8C6D23] hover:text-[#5C4512] font-medium underline underline-offset-4 transition-colors"
+            className="inline-flex items-center gap-1.5 mt-2.5 text-[11px] sm:text-xs text-[#8C6D23] hover:text-[#5C4512] font-medium underline underline-offset-4 transition-colors cursor-pointer"
           >
             <FileText className="w-3 h-3" />
             <span>View Full Invitation Card & Family Details</span>
@@ -350,25 +380,40 @@ export default function LiveQRView({
               <div className="absolute -bottom-1 -left-1 w-3.5 h-3.5 border-b-2 border-l-2 border-[#B8860B]" />
               <div className="absolute -bottom-1 -right-1 w-3.5 h-3.5 border-b-2 border-r-2 border-[#B8860B]" />
 
-              <QrCode className="w-36 h-36 sm:w-40 sm:h-40 text-[#2C2621]" strokeWidth={1.35} />
-              
-              <div className="absolute inset-0 m-auto w-10 h-10 rounded-lg bg-white shadow-md border border-[#D4AF37]/40 flex items-center justify-center">
-                <span className="font-serif font-bold text-xs text-[#B8860B]">SYS</span>
+              <div className="relative w-40 h-40 sm:w-44 sm:h-44 p-1">
+                <Image
+                  src={qrCodeImage}
+                  alt="Scan QR for Event Photos"
+                  width={176}
+                  height={176}
+                  className="w-full h-full object-contain [image-rendering:pixelated]"
+                  priority
+                />
               </div>
             </div>
 
             <div className="flex flex-col gap-2">
               <button
                 onClick={handleCopyLink}
-                className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl bg-gradient-to-r from-[#D4AF37] to-[#B8860B] text-black font-semibold text-xs sm:text-sm hover:brightness-105 active:scale-98 transition-all"
+                className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl bg-gradient-to-r from-[#D4AF37] to-[#B8860B] text-black font-semibold text-xs sm:text-sm hover:brightness-105 active:scale-98 transition-all cursor-pointer shadow-xs"
               >
-                {copied ? <Check className="w-4 h-4" /> : <Share2 className="w-4 h-4" />}
+                {copied ? <Check className="w-4 h-4 text-emerald-900" /> : <Share2 className="w-4 h-4" />}
                 <span>{copied ? "Gallery Link Copied!" : "Copy Gallery Link"}</span>
               </button>
 
+              <a
+                href={galleryUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full flex items-center justify-center gap-1.5 py-1.5 text-xs text-[#8C6D23] hover:text-[#5C4512] font-semibold underline underline-offset-4 transition-colors"
+              >
+                <span>Or open gallery directly</span>
+                <ExternalLink className="w-3.5 h-3.5" />
+              </a>
+
               <button
                 onClick={() => setQrModalOpen(false)}
-                className="w-full py-2 text-xs text-[#7A6B5C] hover:text-[#2C2621] transition-colors"
+                className="w-full py-1 text-xs text-[#7A6B5C] hover:text-[#2C2621] transition-colors cursor-pointer"
               >
                 Back to Celebration Page
               </button>

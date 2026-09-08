@@ -33,6 +33,9 @@ export default function LiveQRPage() {
         blessingQuote="Children are a heritage from the Lord, offspring a reward from Him. — Psalm 127:3"
         childrenImage="/live-qr/children-photo.jpg"
         invitationCardImage="/live-qr/invitation-card.jpg"
+        qrCodeImage="/live-qr/event-qr.png"
+        galleryUrl="https://e.dslr.app/selfie-search/c89e18fe-e0a3-4596-810e-5699e91fcc7a"
+        showWatchLive={false}
         youtubeLiveUrl="https://www.youtube.com"
         youtubeVideoId="M7lc1UVf-VE"
         whatsappNumber="918500622735"
