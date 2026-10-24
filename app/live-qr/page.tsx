@@ -33,7 +33,7 @@ export default function LiveQRPage() {
         invitedBy="Nakka Yasyya and Smt. Mery"
         blessingQuote="Therefore what God has joined together, let no one separate. — Mark 10:9"
         childrenImage="/live-qr/Oct26.jpg"
-        invitationCardImage="/live-qr/invitation.jpg"
+        invitationCardImage="/live-qr/Invitation.jpg"
         qrCodeImage="/live-qr/live-qr.jpg"
         galleryUrl="https://e.dslr.app/selfie-search/fbb48936-ead0-4e74-8f8d-db25d382e3c2"
         showWatchLive={false}
