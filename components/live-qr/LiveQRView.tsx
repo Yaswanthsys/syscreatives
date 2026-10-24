@@ -189,22 +189,18 @@ export default function LiveQRView({
             </div>
           </div>
 
-          {/* Photography Partner */}
-          <div className="flex items-center gap-2">
-            <div className="flex flex-col text-right">
-              <span className="text-[8px] sm:text-[9.5px] font-medium tracking-wider text-[#7A6B5C] uppercase">
-                Photography by
-              </span>
-              <div className="flex h-14 w-28 sm:h-16 sm:w-36 items-center justify-center overflow-hidden">
-                <img
-                  src={photographyPartnerLogo}
-                  alt="Photography partner logo"
-                  className="block max-h-full max-w-full object-contain object-center"
-                  loading="eager"
-                  decoding="async"
-                />
-              </div>
-            </div>
+          {/* Photography Partner: text branding avoids oversized logo artwork */}
+          <div className="flex min-w-0 shrink-0 flex-col items-end justify-center text-right leading-tight">
+            <span className="font-sans text-[10px] sm:text-xs font-extrabold tracking-[0.12em] sm:tracking-[0.16em] text-[#2C2621] uppercase whitespace-nowrap">
+              VAMSI PHOTOGRAPHY
+            </span>
+            <a
+              href="tel:+919505269766"
+              className="mt-1 font-sans text-[9px] sm:text-[11px] font-semibold tracking-[0.12em] text-[#7A6B5C] whitespace-nowrap"
+              aria-label="Call Vamsi Photography at 9505269766"
+            >
+              9505269766
+            </a>
           </div>
         </header>
 
