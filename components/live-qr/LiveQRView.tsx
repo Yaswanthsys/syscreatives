@@ -66,7 +66,7 @@ export default function LiveQRView({
   invitedBy = "Nakka Yasyya and Smt. Mery",
   blessingQuote = "Therefore what God has joined together, let no one separate. — Mark 10:9",
   childrenImage = "/live-qr/Oct26.jpg",
-  invitationCardImage = "/live-qr/Invitation.jpg",
+  invitationCardImage = "/live-qr/invitation.jpg",
   qrCodeImage = "/live-qr/live-qr.jpg",
   youtubeLiveUrl = "https://www.youtube.com",
   youtubeVideoId = "M7lc1UVf-VE",
@@ -195,14 +195,13 @@ export default function LiveQRView({
               <span className="text-[8px] sm:text-[9.5px] font-medium tracking-wider text-[#7A6B5C] uppercase">
                 Photography by
               </span>
-              <div className="relative h-5 sm:h-6 w-28 sm:w-36 flex items-center justify-end">
-                <Image
+              <div className="flex h-14 w-28 sm:h-16 sm:w-36 items-center justify-center overflow-hidden">
+                <img
                   src={photographyPartnerLogo}
                   alt="Photography partner logo"
-                  width={140}
-                  height={28}
-                  className="object-contain"
-                  priority
+                  className="block max-h-full max-w-full object-contain object-center"
+                  loading="eager"
+                  decoding="async"
                 />
               </div>
             </div>
@@ -225,13 +224,12 @@ export default function LiveQRView({
           {/* Main wedding photo in gold/champagne frame */}
           <div className="relative w-full aspect-[1.5/1] sm:aspect-[1.65/1] max-h-[38vh] min-h-[200px] p-1.5 sm:p-2 rounded-2xl sm:rounded-3xl bg-gradient-to-b from-[#F5D77F] via-[#D4AF37] to-[#B8860B] shadow-[0_12px_36px_-6px_rgba(212,175,55,0.35)] my-1.5 shrink-0 group">
             <div className="relative w-full h-full overflow-hidden rounded-xl sm:rounded-2xl bg-white border border-white/60">
-              <Image
+              <img
                 src={childrenImage}
                 alt="Dileep and Meghana wedding celebration"
-                fill
-                priority
-                className="object-cover object-center group-hover:scale-[1.015] transition-transform duration-500"
-                sizes="(max-width: 768px) 95vw, 680px"
+                className="absolute inset-0 h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-[1.015]"
+                fetchPriority="high"
+                decoding="async"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-white/10 pointer-events-none" />
             </div>
@@ -240,9 +238,14 @@ export default function LiveQRView({
           {/* Couple names */}
           <div className="mt-2.5 sm:mt-3">
             <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold tracking-wide text-[#9E2A4B] drop-shadow-xs flex items-center justify-center gap-2 sm:gap-3 flex-wrap">
-              <span>Dileep</span>
-              <Heart className="w-5 h-5 sm:w-6 sm:h-6 text-[#E11D48] fill-[#E11D48] animate-pulse inline-block" />
-              <span>Meghana</span>
+              {twinNames.split("&").map((name, index) => (
+                <React.Fragment key={`${name.trim()}-${index}`}>
+                  {index > 0 && (
+                    <Heart className="w-5 h-5 sm:w-6 sm:h-6 text-[#E11D48] fill-[#E11D48] inline-block" />
+                  )}
+                  <span>{name.trim()}</span>
+                </React.Fragment>
+              ))}
             </h1>
             <span className="font-serif text-xs sm:text-sm tracking-[0.35em] text-[#8C6D23] uppercase font-semibold mt-0.5 block">
               {familyName}
@@ -316,8 +319,14 @@ export default function LiveQRView({
           
           {/* Parents & Family credit from the card */}
           <div className="text-[10px] sm:text-[11px] text-[#7A6B5C] font-light max-w-lg mb-2">
-            {parents ? <p className="font-serif text-[#8C6D23] font-medium">Parents: {parents}</p> : null}
-            <p className="text-[#8F8172] text-[9.5px]">Invited by {invitedBy} • {dinnerNote}</p>
+            {parents?.trim() ? (
+              <p className="font-serif text-[#8C6D23] font-medium">
+                Parents: {parents}
+              </p>
+            ) : null}
+            <p className="text-[#8F8172] text-[9.5px]">
+              Hosted by {invitedBy} • {dinnerNote}
+            </p>
           </div>
 
           {/* WhatsApp Support Bar */}
