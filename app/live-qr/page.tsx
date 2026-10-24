@@ -2,13 +2,14 @@ import { Metadata } from "next";
 import LiveQRView from "@/components/live-qr/LiveQRView";
 
 export const metadata: Metadata = {
-  title: "Seren & Selena | Twins Birthday Celebration | Live Stream & QR Gallery",
+  title: "Dileep & Meghana | Wedding Celebration | Live Stream & QR Gallery",
   description:
-    "Two Peas in a Pod — Celebrate the birthday of Seren & Selena Vijjeswarapu. Watch live broadcast and find all event photos with AI face recognition.",
+    "Join us in celebrating the wedding of Dileep & Meghana. Explore the wedding invitation, access the live photo gallery, and relive beautiful moments from their special day.",
   openGraph: {
-    title: "Seren & Selena — Twins Birthday Celebration | SYS Creatives",
-    description: "Two Peas in a Pod • Live stream & AI QR photo gallery.",
-    images: [{ url: "/live-qr/children-photo.jpg" }],
+    title: "Dileep & Meghana — Wedding Celebration | SYS Creatives",
+    description:
+      "A celebration of love and togetherness. Wedding ceremony, reception, and live photo gallery.",
+    images: [{ url: "/live-qr/Oct26.jpg" }],
   },
 };
 
@@ -18,26 +19,35 @@ export default function LiveQRPage() {
       <LiveQRView
         studioName="SYS CREATIVES"
         studioTagline="PREMIUM CREATIVE AGENCY & LIVE STREAMING"
-        photographyPartnerLogo="/live-qr/snaps-by-rajesh.png"
-        themeTitle="Two Peas in a Pod"
-        themeSubtitle="TWINS BIRTHDAY CELEBRATION"
-        twinNames="Seren & Selena"
-        familyName="VIJJESWARAPU"
-        eventDate="8th September 2026 (Tuesday)"
-        eventTime="Evening starting at 5:00 PM"
-        venueName="D1 Convention"
-        venueAddress="1 Walkers rd, Venkateswara Nagar, Rajahmundry"
-        dinnerNote="Dinner to follow"
-        parents="Dr. Vinod Vijjeswarapu MBBS, MPH | Dr. Satya Sudha Daggumilli MBBS, MD"
-        invitedBy="Vijjeswarapu and Daggumilli Family"
-        blessingQuote="Children are a heritage from the Lord, offspring a reward from Him. — Psalm 127:3"
-        childrenImage="/live-qr/children-photo.jpg"
-        invitationCardImage="/live-qr/invitation-card.jpg"
-        qrCodeImage="/live-qr/event-qr.png"
-        galleryUrl="https://e.dslr.app/selfie-search/c89e18fe-e0a3-4596-810e-5699e91fcc7a"
+        photographyPartnerLogo="/live-qr/Bhimavaram.png"
+
+        themeTitle="A Celebration of Love"
+        themeSubtitle="WEDDING CELEBRATION"
+        twinNames="Dileep & Meghana"
+        familyName="NAKKA FAMILY"
+
+        eventDate="26th October 2026 (Monday)"
+        eventTime="Wedding Ceremony at 10:00 AM"
+        venueName="Saint Peters Lutheran Church"
+        venueAddress="Tallamma Cheruvu"
+        dinnerNote="Reception & Lunch to follow at 12:00 PM"
+
+        parents=""
+
+        invitedBy="Nakka Yasyya and Smt. Mery"
+
+        blessingQuote="Therefore what God has joined together, let no one separate. — Mark 10:9"
+
+        childrenImage="/live-qr/Oct26.jpg"
+        invitationCardImage="/live-qr/invitation.jpg"
+        qrCodeImage="/live-qr/live-qr.jpg"
+
+        galleryUrl="https://e.dslr.app/selfie-search/fbb48936-ead0-4e74-8f8d-db25d382e3c2"
+
         showWatchLive={false}
         youtubeLiveUrl="https://www.youtube.com"
         youtubeVideoId="M7lc1UVf-VE"
+
         whatsappNumber="918500622735"
         displayPhone="+91 85006 22735"
       />
